@@ -174,6 +174,16 @@ export ADMIN_PASS="contraseña-segura"
 - `DELETE /admin/productos/eliminar/<id>` - Eliminar producto
 - `GET /admin/api/reservas` - Reservas registradas (JSON)
 
+## 👨‍💼 Panel de Administración
+
+### Funcionalidades Principales
+El panel de administración permite gestionar completamente el e-commerce:
+- **CRUD de Productos**: Crear, leer, actualizar y eliminar productos
+- **Gestión de Categorías**: Organizar productos por tipo
+- **Control de Ofertas**: Activar/desactivar promociones
+- **Gestión de Stock**: Marcar productos como disponibles o descartados
+- **Visualización de Reservas**: Ver todas las sesiones fotográficas agendadas
+
 ## 📝 Estructura de Datos
 
 ### Producto
