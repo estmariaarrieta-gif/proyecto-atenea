@@ -293,11 +293,15 @@ function initEventListeners() {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
             
-            // Si es un enlace a categoría (#arneses, #jackets, etc.)
-            if (href && href.startsWith('#') && href !== '#home') {
+            // Si es un enlace con hash (categoría o sección)
+            if (href && href.startsWith('#')) {
                 e.preventDefault();
                 const category = href.replace('#', '');
                 navigateToCategory(category);
+                
+                // Actualizar nav links activos
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
             }
         });
     });
@@ -317,10 +321,8 @@ function initEventListeners() {
     // Check URL hash on load
     if (window.location.hash) {
         const category = window.location.hash.replace('#', '');
-        navigateToCategory(category);
-    } else {
-        // Si no hay hash, asegurar que home esté visible
-        navigateToCategory('home');
+        // Pequeño delay para asegurar que el DOM esté listo
+        setTimeout(() => navigateToCategory(category), 100);
     }
     
     // Search
@@ -419,22 +421,9 @@ function initEventListeners() {
     categoryCards.forEach(card => {
         card.addEventListener('click', () => {
             const category = card.dataset.category;
-            if (category === 'sale') {
-                currentFilter = 'sale';
-            } else {
-                currentFilter = category;
+            if (category) {
+                navigateToCategory(category);
             }
-            filterProducts(currentFilter);
-            
-            const productsSection = document.getElementById('products');
-            if (productsSection) {
-                productsSection.scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            // Update filter buttons
-            filterBtns.forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.filter === currentFilter);
-            });
         });
     });
     
@@ -648,93 +637,58 @@ function getCategoryName(category) {
 
 // === Navigation ===
 window.navigateToCategory = function(category) {
+    console.log('Navegando a:', category);
+    
     // Cerrar menú móvil si está abierto
     const navLinks = document.getElementById('navLinks');
     const overlay = document.getElementById('overlay');
     if (navLinks) navLinks.classList.remove('active');
     if (overlay) overlay.classList.remove('active');
     
-    // Actualizar URL hash
-    window.location.hash = category;
-    
-    const heroSection = document.getElementById('home');
-    const featuredSection = document.getElementById('destacados');
-    
-    // Ocultar todas las secciones con clase page-section
-    const allPageSections = document.querySelectorAll('.page-section');
-    allPageSections.forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Si es "home", mostrar hero y productos destacados
+    // Si es "home", scroll al inicio
     if (category === 'home' || category === '') {
-        console.log('Navegando a home...');
-        
-        // Mostrar hero y featured (sin clase page-section)
-        if (heroSection) {
-            heroSection.style.display = 'block';
-            console.log('Hero mostrado');
-        }
-        if (featuredSection) {
-            featuredSection.style.display = 'block';
-            console.log('Featured mostrado');
-        }
-        
-        // Scroll al top
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Actualizar hash sin recargar
+        history.pushState(null, null, '#home');
         return;
     }
     
-    // Para cualquier otra navegación, ocultar hero y featured
-    if (heroSection) heroSection.style.display = 'none';
-    if (featuredSection) featuredSection.style.display = 'none';
-    
-    // Si es una sección de contenido (nosotros o fotografia)
-    if (category === 'nosotros') {
-        const aboutSection = document.getElementById('nosotros');
-        if (aboutSection) {
-            aboutSection.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Si es una sección específica (nosotros, fotografia), hacer scroll a ella
+    if (category === 'nosotros' || category === 'fotografia') {
+        const section = document.getElementById(category);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, null, '#' + category);
         }
         return;
     }
     
-    if (category === 'fotografia') {
-        const photographySection = document.getElementById('fotografia');
-        if (photographySection) {
-            photographySection.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Si es una categoría de productos (arneses, jackets, lenceria, etc.)
+    const validCategories = ['arneses', 'jackets', 'lenceria', 'mascaras', 'accesorios', 'sale', 'all'];
+    
+    if (validCategories.includes(category)) {
+        // Scroll a la sección de productos
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        return;
+        
+        // Aplicar filtro de categoría
+        currentFilter = category;
+        filterProducts(category);
+        
+        // Actualizar botones de filtro
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === category);
+        });
+        
+        // Actualizar título de sección
+        updateSectionTitle(category);
+        
+        // Actualizar hash
+        history.pushState(null, null, '#' + category);
     }
-    
-    // Si es una categoría de productos, mostrar la sección de productos
-    const productsSection = document.getElementById('products');
-    if (productsSection) {
-        productsSection.classList.add('active');
-    }
-    
-    // Determinar el filtro correcto para productos
-    let filter = category;
-    if (category === 'sale') {
-        filter = 'sale';
-    }
-    
-    // Aplicar filtro
-    currentFilter = filter;
-    filterProducts(filter);
-    
-    // Scroll al top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // Actualizar botones de filtro
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === filter);
-    });
-    
-    // Actualizar título de sección
-    updateSectionTitle(filter);
 }
 
 function updateSectionTitle(filter) {
