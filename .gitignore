@@ -61,3 +61,12 @@ update_routes.py
 # OneDrive (si es necesario)
 ~$*
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+*.cover
+coverage.xml
+*.coveragerc
+

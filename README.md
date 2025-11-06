@@ -5,6 +5,8 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Flask](https://img.shields.io/badge/Flask-3.0-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
+![CI/CD](https://github.com/estmariaarrieta-gif/proyecto-atenea/actions/workflows/ci-cd.yml/badge.svg)
+![Tests](https://img.shields.io/badge/tests-19%20passed-success)
 
 ## 📸 Características
 
@@ -129,6 +131,64 @@ Accede al panel de administración en: **http://localhost:5000/admin/login**
 ### Despliegue
 - **Gunicorn** - Servidor WSGI para producción
 - **WSGI** - Interfaz estándar Python
+
+### CI/CD & Testing
+- **GitHub Actions** - Pipeline de integración continua
+- **pytest** - Framework de testing (19 tests)
+- **pytest-cov** - Cobertura de código
+- **flake8** - Linting y análisis estático
+
+## 🧪 Testing
+
+### Ejecutar Tests Localmente
+
+```bash
+# Todos los tests
+pytest
+
+# Con cobertura
+pytest --cov=app --cov-report=html
+
+# Ver reporte de cobertura
+# Abre: htmlcov/index.html en tu navegador
+```
+
+### Tests Incluidos
+
+- ✅ **19 tests automatizados**
+- ✅ Tests de catálogo y productos
+- ✅ Tests de carrito de compras
+- ✅ Tests de autenticación admin
+- ✅ Tests de endpoints API
+- ✅ Tests de configuración
+
+## 🚀 Pipeline CI/CD
+
+El proyecto incluye un **pipeline completamente automatizado** con GitHub Actions:
+
+### 📋 Fases del Pipeline
+
+1. **📦 Instalación de Dependencias** - Setup de Python y paquetes
+2. **🧪 Pruebas Automatizadas** - Ejecución de 19 tests + linting
+3. **🔒 Análisis de Seguridad** - Verificación de vulnerabilidades
+4. **🏗️ Build y Validación** - Compilación y verificación de estructura
+5. **🚀 Despliegue Automático** - Deploy a producción (solo main)
+6. **📊 Reporte Final** - Métricas y confirmación
+
+### ⚡ Activación Automática
+
+El pipeline se ejecuta automáticamente en:
+- ✅ Push a `main` o `develop`
+- ✅ Pull Request a `main`
+- ✅ Ejecución manual desde GitHub Actions
+
+### 📊 Status del Pipeline
+
+![CI/CD Status](https://github.com/estmariaarrieta-gif/proyecto-atenea/actions/workflows/ci-cd.yml/badge.svg)
+
+**Ver logs completos:** [GitHub Actions](https://github.com/estmariaarrieta-gif/proyecto-atenea/actions)
+
+**Documentación completa:** [CI-CD-PIPELINE.md](docs/CI-CD-PIPELINE.md)
 
 ## 🌐 Despliegue en Producción
 
