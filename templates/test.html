@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test - SALVAJE</title>
+    <style>
+        body { font-family: Arial; padding: 40px; background: #1a1a1a; color: #fff; }
+        .test-item { padding: 10px; margin: 10px 0; border: 1px solid #333; }
+        .success { background: #2d5016; }
+        .error { background: #501616; }
+        img { max-width: 200px; border: 2px solid #d4af37; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Prueba de Archivos Estáticos - SALVAJE</h1>
+    
+    <div class="test-item">
+        <h3>CSS:</h3>
+        <p>URL: {{ url_for('static', filename='css/marketplace-style.css') }}</p>
+        <a href="{{ url_for('static', filename='css/marketplace-style.css') }}" target="_blank">Abrir CSS</a>
+    </div>
+    
+    <div class="test-item">
+        <h3>JavaScript:</h3>
+        <p>URL: {{ url_for('static', filename='js/marketplace-script.js') }}</p>
+        <a href="{{ url_for('static', filename='js/marketplace-script.js') }}" target="_blank">Abrir JS</a>
+    </div>
+    
+    <div class="test-item">
+        <h3>Imagen de Prueba (Bonnie):</h3>
+        <p>URL: {{ url_for('static', filename='images/products/bonnie.jpg') }}</p>
+        <br>
+        <img src="{{ url_for('static', filename='images/products/bonnie.jpg') }}" alt="Test">
+    </div>
+    
+    <div class="test-item">
+        <h3>Todas las imágenes de productos:</h3>
+        {% for product in ['medias-malla', 'bonnie', 'cine-negro', 'crop-top-arnes', 'diana-de-gales', 'alligator', 'oveja-negra', 'infinity-choker'] %}
+            <img src="{{ url_for('static', filename='images/products/' + product + '.jpg') }}" alt="{{ product }}" style="width: 100px; margin: 5px;">
+        {% endfor %}
+    </div>
+    
+    <hr>
+    <a href="{{ url_for('catalogo.index') }}" style="color: #d4af37; font-size: 20px;">← Volver al Sitio Principal</a>
+</body>
+</html>
+

@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALVAJE Indumentary - Leather Fashion</title>
+    <link rel="stylesheet" href="marketplace-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay" aria-hidden="true">
+        <div class="login-card" role="dialog" aria-labelledby="loginTitle" aria-modal="true">
+            <div class="login-header">
+                <h2 id="loginTitle"><i class="fas fa-user-shield"></i> Acceso de Administrador</h2>
+                <p>Ingresa tus credenciales para acceder al panel</p>
+            </div>
+            <form id="loginForm" class="login-form" autocomplete="off">
+                <div class="login-form-group">
+                    <label for="loginUser"><i class="fas fa-user"></i> Usuario</label>
+                    <input type="text" id="loginUser" name="user" required placeholder="Tu usuario">
+                </div>
+                <div class="login-form-group">
+                    <label for="loginPass"><i class="fas fa-lock"></i> Contraseña</label>
+                    <input type="password" id="loginPass" name="pass" required placeholder="Tu contraseña">
+                </div>
+                <div class="login-actions">
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                </div>
+                <div class="login-error" id="loginError" role="alert" style="display:none;">
+                    <i class="fas fa-triangle-exclamation"></i> Usuario o contraseña inválidos
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="contact-info">
+                        <span><i class="fas fa-phone"></i> +57 321 882 8027</span>
+                        <span><i class="fas fa-envelope"></i> order@salvajeindumentary.co</span>
+                    </div>
+                    <div class="currency-selector">
+                        <select id="currency">
+                            <option value="COP">$ COP</option>
+                            <option value="USD">$ USD</option>
+                            <option value="EUR">€ EUR</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <h1>SALVAJE</h1>
+                        <span>Indumentary</span>
+                    </div>
+                    
+                    <div class="nav-links" id="navLinks">
+                        <a href="#home" class="nav-link active">Inicio</a>
+                        <div class="dropdown">
+                            <a href="#arneses" class="nav-link">Arneses <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="#" data-category="arnes-completo">Cuerpo Completo</a>
+                                <a href="#" data-category="arnes-hombre">Hombre</a>
+                                <a href="#" data-category="arnes-gluteos">Glúteos y Piernas</a>
+                                <a href="#" data-category="arnes-superior">Superior</a>
+                            </div>
+                        </div>
+                        <a href="#jackets" class="nav-link">Jackets</a>
+                        <a href="#lenceria" class="nav-link">Lencería</a>
+                        <div class="dropdown">
+                            <a href="#accesorios" class="nav-link">Accesorios <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="#" data-category="mascaras">Máscaras</a>
+                                <a href="#" data-category="accesorios">Accesorios</a>
+                            </div>
+                        </div>
+                        <a href="#nosotros" class="nav-link">Nosotros</a>
+                        <a href="#fotografia" class="nav-link">Sesión Fotográfica</a>
+                    </div>
+                    
+                    <div class="nav-actions">
+                        <button class="search-btn" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="cart-btn" id="cartBtn">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </button>
+                        <button class="admin-btn" id="adminBtn" style="display: none;" title="Panel de Administración">
+                            <i class="fas fa-user-shield"></i>
+                        </button>
+                        <button class="mobile-menu-btn" id="mobileMenuBtn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Search Bar -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar productos...">
+                <button class="close-search" id="closeSearch">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h2 class="hero-subtitle">Nueva Colección</h2>
+                    <h1 class="hero-title">SALVAJE JACKETS</h1>
+                    <p class="hero-description">Libera tu poder y sensualidad</p>
+                    <button class="btn btn-primary">Ver Colección</button>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h2 class="hero-subtitle">Sale 🏷️</h2>
+                    <h1 class="hero-title">HASTA 50% OFF</h1>
+                    <p class="hero-description">En productos seleccionados</p>
+                    <button class="btn btn-primary">Comprar Ahora</button>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h2 class="hero-subtitle">Experiencia Única</h2>
+                    <h1 class="hero-title">SESIÓN FOTOGRÁFICA</h1>
+                    <p class="hero-description">Captura tu esencia salvaje</p>
+                    <button class="btn btn-primary">Más Información</button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products" id="destacados">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Productos Destacados</h2>
+                <p class="section-subtitle">Lo mejor de nuestra colección</p>
+            </div>
+            <div class="featured-grid" id="featuredGrid">
+                <!-- Los productos se cargarán dinámicamente aquí -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories page-section" id="categorias">
+        <div class="container">
+            <h2 class="section-title">Explora por Categoría</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="arneses">
+                    <div class="category-image">
+                        <i class="fas fa-vest"></i>
+                    </div>
+                    <h3>Arneses</h3>
+                    <p>Diseños únicos y versátiles</p>
+                </div>
+                <div class="category-card" data-category="jackets">
+                    <div class="category-image">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <h3>Jackets</h3>
+                    <p>Estilo y comodidad</p>
+                </div>
+                <div class="category-card" data-category="lenceria">
+                    <div class="category-image">
+                        <i class="fas fa-ribbon"></i>
+                    </div>
+                    <h3>Lencería</h3>
+                    <p>Elegancia y sensualidad</p>
+                </div>
+                <div class="category-card" data-category="mascaras">
+                    <div class="category-image">
+                        <i class="fas fa-mask"></i>
+                    </div>
+                    <h3>Máscaras</h3>
+                    <p>Misterio y sofisticación</p>
+                </div>
+                <div class="category-card" data-category="accesorios">
+                    <div class="category-image">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Accesorios</h3>
+                    <p>Complementos perfectos</p>
+                </div>
+                <div class="category-card" data-category="sale">
+                    <div class="category-image sale-badge">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3>Sale</h3>
+                    <p>Ofertas especiales</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros Section -->
+    <section class="about page-section" id="nosotros">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/about-salvaje.jpg" alt="SALVAJE Indumentary">
+                    <div class="about-image-overlay"></div>
+                </div>
+                <div class="about-text">
+                    <h2 class="section-title">SOBRE NOSOTROS</h2>
+                    <div class="about-description">
+                        <p class="highlight">
+                            <strong>SALVAJE</strong> es un concepto que nos pertenece a todos y todas.
+                        </p>
+                        <p>
+                            A pesar que nuestro racionamiento como seres humanos está constantemente presente en cada uno de nuestros actos, los instintos jamás serán modificados por más racionalistas que seamos.
+                        </p>
+                        <p>
+                            Nuestro instinto <strong>SALVAJE</strong> como seres sexuales está presente siempre, manifestándose en todos nuestros pensamientos y actos hasta el escenario íntimo como aspecto natural.
+                        </p>
+                        <p class="brand-statement">
+                            <strong>Salvaje Indumentary</strong> parte de este concepto instintivo, tomando como lenguaje de expresión la sensualidad y la elegancia a través de prendas confecciones en cuero.
+                        </p>
+                    </div>
+                    <div class="about-cta">
+                        <a href="#products" class="btn btn-primary">Explorar Colección</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products page-section" id="products">
+        <div class="container">
+            <div class="products-header">
+                <div class="breadcrumb" id="breadcrumb">
+                    <a href="#" class="breadcrumb-item" onclick="navigateToCategory('all'); return false;">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-item active" id="currentCategory">Todos los Productos</span>
+                </div>
+                <h2 class="section-title">Productos Destacados</h2>
+                <div class="filter-controls">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="arneses">Arneses</button>
+                    <button class="filter-btn" data-filter="jackets">Jackets</button>
+                    <button class="filter-btn" data-filter="lenceria">Lencería</button>
+                    <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+                    <button class="filter-btn" data-filter="sale">Sale</button>
+                </div>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se cargarán dinámicamente con JavaScript -->
+            </div>
+            
+            <div class="load-more">
+                <button class="btn btn-secondary" id="loadMoreBtn">Cargar Más Productos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photography Session Section -->
+    <section class="photography page-section" id="fotografia">
+        <div class="container">
+            <!-- Quote First -->
+            <div class="photography-quote">
+                <p class="quote-text">
+                    <i class="fas fa-quote-left"></i>
+                    En el miedo no crece nada, en el amor y la seguridad propia renace y se crea todo, eso es experiencia salvaje, la oportunidad de verte sin miedo.
+                    <i class="fas fa-quote-right"></i>
+                </p>
+                <p class="quote-author">
+                    <strong>Frase de Ana Henao</strong>, una mujer como tú o como yo, ella nos compartió este sentir después de haber vivido una experiencia salvaje.
+                </p>
+            </div>
+
+            <!-- Header -->
+            <div class="photography-header">
+                <h2 class="section-title">Sesión Fotográfica</h2>
+                <p class="section-subtitle">Coaching – Más allá de una imagen</p>
+                <p class="photography-intro">
+                    <strong>Esta no es solo una sesión de fotos.</strong>
+                </p>
+            </div>
+
+            <!-- Description -->
+            <div class="photography-description">
+                <p>
+                    Es un proceso psicológico, emocional y estético diseñado para reconectar contigo misma, redefinir la forma en la que te ves y te hablas, y permitirte reconocer tu autenticidad como mujer, desde un lugar profundo y transformador.
+                </p>
+                <p>
+                    A través de la fotografía y el coaching emocional, te guiamos en una experiencia íntima y segura que fortalece tu:
+                </p>
+                <ul class="benefits-list">
+                    <li><i class="fas fa-check-circle"></i> Autoestima</li>
+                    <li><i class="fas fa-check-circle"></i> Autoconcepto</li>
+                    <li><i class="fas fa-check-circle"></i> Confianza corporal</li>
+                    <li><i class="fas fa-check-circle"></i> Seguridad emocional</li>
+                    <li><i class="fas fa-check-circle"></i> Aceptación propia</li>
+                </ul>
+                <p>
+                    Durante la sesión, trabajamos desde la conversación consciente, la mirada amorosa, la expresión corporal y el arte de posar sin máscaras.
+                </p>
+                <p>
+                    Este proceso te ayudará a romper con prejuicios, soltar ideas erróneas sobre los "cuerpos perfectos" y descubrir la fuerza y belleza real que habita en ti.
+                </p>
+                
+                <h4 class="what-you-get-title">📸 Lo que obtienes:</h4>
+                <ul class="benefits-list">
+                    <li><i class="fas fa-check-circle"></i> Una experiencia personalizada de auto conexión</li>
+                    <li><i class="fas fa-check-circle"></i> Dirección y acompañamiento en cada paso del proceso</li>
+                    <li><i class="fas fa-check-circle"></i> Fotografías profesionales que capturan tu autenticidad y poder</li>
+                    <li><i class="fas fa-check-circle"></i> Un espacio amoroso, sin juicios, solo para ti</li>
+                    <li><i class="fas fa-check-circle"></i> Opcional: asesoría de imagen, maquillaje, estilismo y vestuario</li>
+                </ul>
+                
+                <p class="final-statement">
+                    Esta sesión es para ti si deseas verte y sentirte distinta, no como te han dicho que debes ser, sino como realmente eres: <strong>una mujer única, compleja, poderosa y hermosa</strong>.
+                </p>
+            </div>
+
+            <!-- Session Plans in Bogotá -->
+            <div class="sessions-bogota">
+                <h3 class="sessions-location">BOGOTÁ</h3>
+                
+                <div class="sessions-grid">
+                    <!-- Sesión ESENCIA -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <span class="session-number">1</span>
+                            <h4 class="session-name">Sesión <span class="highlight">ESENCIA</span></h4>
+                            <p class="session-price">$350.000 COP</p>
+                        </div>
+                        <div class="session-body">
+                            <p class="session-description">
+                                Una sesión rápida pero poderosa. 30 minutos para que te regales una experiencia única, para ti o para alguien especial. Perfecto para probar tu primera sesión o para actualizar tu imagen con fotos de calidad y buena energía.
+                            </p>
+                            <h5 class="includes-title">Incluye:</h5>
+                            <ul class="includes-list">
+                                <li><i class="fas fa-check"></i> 10 fotos editadas</li>
+                                <li><i class="fas fa-check"></i> 30 minutos de sesión</li>
+                                <li><i class="fas fa-check"></i> 2 vestuario</li>
+                                <li><i class="fas fa-check"></i> Dirección lenguaje corporal</li>
+                                <li><i class="fas fa-check"></i> Locación tipo editorial</li>
+                            </ul>
+                            <p class="session-value">Valor: $350.000</p>
+                            <button class="btn btn-primary session-reserve-btn" onclick="openBookingModal('esencia', 350000)">
+                                <i class="fas fa-calendar-check"></i> Reservar Sesión
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sesión ELEGANT -->
+                    <div class="session-card featured">
+                        <div class="session-badge">Recomendada</div>
+                        <div class="session-header">
+                            <span class="session-number">2</span>
+                            <h4 class="session-name">Sesión <span class="highlight">ELEGANT</span></h4>
+                            <p class="session-price">$570.000 COP</p>
+                        </div>
+                        <div class="session-body">
+                            <p class="session-description">
+                                Es una sesión fotográfica con estilo y propósito. No incluye maquillaje, pero sí todo el acompañamiento para que te veas elegante, fuerte y auténtica.
+                            </p>
+                            <h5 class="includes-title">Incluye:</h5>
+                            <ul class="includes-list">
+                                <li><i class="fas fa-check"></i> Dirección en lenguaje corporal</li>
+                                <li><i class="fas fa-check"></i> 20 fotos editadas</li>
+                                <li><i class="fas fa-check"></i> 4 Cambios de vestuario (los llevas tú)</li>
+                                <li><i class="fas fa-check"></i> Locación tipo editorial</li>
+                                <li><i class="fas fa-check"></i> Duración: 1 hora</li>
+                            </ul>
+                            <p class="session-value">Valor: $570.000</p>
+                            <button class="btn btn-primary session-reserve-btn" onclick="openBookingModal('elegant', 570000)">
+                                <i class="fas fa-calendar-check"></i> Reservar Sesión
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sesión PREMIUM -->
+                    <div class="session-card premium">
+                        <div class="session-badge premium-badge">Premium</div>
+                        <div class="session-header">
+                            <span class="session-number">3</span>
+                            <h4 class="session-name">Sesión <span class="highlight">PREMIUM</span></h4>
+                            <p class="session-price">$900.000 COP</p>
+                        </div>
+                        <div class="session-body">
+                            <p class="session-description">
+                                Esta es una experiencia completa. Incluye maquillaje profesional, uso de uno de nuestros arneses como obsequio y una sesión fotográfica íntima, poderosa y transformadora.
+                            </p>
+                            <p class="session-description-extra">
+                                No solo vas a verte diferente, vas a sentirte diferente. Ideal para mujeres que quieren vivir un momento para reconectarse, regalarse autoestima y guardar para siempre una nueva forma de verse.
+                            </p>
+                            <h5 class="includes-title">Incluye:</h5>
+                            <ul class="includes-list">
+                                <li><i class="fas fa-check"></i> Dos vestuarios de obsequio</li>
+                                <li><i class="fas fa-check"></i> Sesión completa</li>
+                                <li><i class="fas fa-check"></i> Dirección lenguaje corporal</li>
+                                <li><i class="fas fa-check"></i> 30 fotos editadas</li>
+                                <li><i class="fas fa-check"></i> Duración: 1 hora y 30 minutos</li>
+                                <li><i class="fas fa-check"></i> Coordinadora que te asesorará en Styling y en todo lo que necesites</li>
+                                <li><i class="fas fa-check"></i> 6 Cambios de vestuario (los llevas tú)</li>
+                            </ul>
+                            <p class="session-value">Valor: $900.000</p>
+                            <button class="btn btn-primary session-reserve-btn" onclick="openBookingModal('premium', 900000)">
+                                <i class="fas fa-calendar-check"></i> Reservar Sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Nacional -->
+            <div class="national-plan">
+                <div class="national-plan-header">
+                    <h3 class="national-plan-title">PLAN NACIONAL – SESIONES PREMIUM SALVAJE</h3>
+                    <h4 class="national-plan-subtitle">GIRA NACIONAL: EL VIAJE HACIA TI</h4>
+                    <p class="national-plan-price">Precio: $1.500.000 COP</p>
+                </div>
+                
+                <div class="national-plan-content">
+                    <div class="national-plan-info">
+                        <h5><i class="fas fa-map-marker-alt"></i> Ciudades:</h5>
+                        <p class="cities-list">Medellín, Cali, Manizales, Armenia, Pereira, Barranquilla, Cartagena, Santa Marta, Bucaramanga e Ibagué.</p>
+                        
+                        <h5><i class="fas fa-lightbulb"></i> Concepto general:</h5>
+                        <p>
+                            Una experiencia fotográfica emocional y transformadora para mujeres en distintas ciudades del país. Un viaje íntimo de conexión con el cuerpo, la autoestima y la sensualidad a través del arte fotográfico.
+                        </p>
+                        
+                        <h5><i class="fas fa-star"></i> Incluye:</h5>
+                        <ul class="national-includes">
+                            <li><i class="fas fa-check"></i> Dirección emocional y estética durante la sesión</li>
+                            <li><i class="fas fa-check"></i> Arnés obsequio confeccionado a tu medida</li>
+                            <li><i class="fas fa-check"></i> Charla coaching para iniciar tu sesión fotográfica</li>
+                            <li><i class="fas fa-check"></i> 30 fotos finales y 2 clips</li>
+                            <li><i class="fas fa-check"></i> Asesoramiento Styling</li>
+                            <li><i class="fas fa-check"></i> Duración: 2 horas</li>
+                            <li><i class="fas fa-check"></i> Asesoría estética, dirección emocional, postproducción profesional</li>
+                            <li><i class="fas fa-check"></i> Selección y edición de material logrado durante la sesión</li>
+                            <li><i class="fas fa-check"></i> 5 cambios de vestuario (definidos previamente)</li>
+                        </ul>
+                        
+                        <div class="location-pricing">
+                            <h5><i class="fas fa-map-marked-alt"></i> Precio por locación (no incluido en el paquete):</h5>
+                            <ul class="location-list">
+                                <li>• Tipo editorial apartamento: <strong>$400.000 COP</strong></li>
+                                <li>• Estudio fotográfico: <strong>$400.000 COP</strong></li>
+                            </ul>
+                            <p class="location-note"><em>El valor de la locación es adicional y depende de la que elijas.</em></p>
+                        </div>
+                        
+                        <p class="national-final-value"><strong>Valor: $1.500.000 COP</strong></p>
+                    </div>
+                    
+                    <div class="national-plan-cta">
+                        <button class="btn btn-primary btn-lg" onclick="openBookingModal('nacional', 1500000)">
+                            <i class="fas fa-calendar-check"></i> Reservar Mi Sesión
+                        </button>
+                        <p class="cta-note">Selecciona fecha y hora disponible para tu sesión</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Envío Gratis</h3>
+                    <p>En compras superiores a $200.000</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Compra Segura</h3>
+                    <p>Protección de datos garantizada</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Devoluciones</h3>
+                    <p>30 días para cambios y devoluciones</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Soporte 24/7</h3>
+                    <p>Atención personalizada siempre</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Únete a la Comunidad Salvaje</h2>
+                <p>Recibe ofertas exclusivas y entérate de nuestros nuevos lanzamientos</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit" class="btn btn-primary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>SALVAJE Indumentary</h3>
+                    <p>Leather indumentary de alta calidad, diseñada para quienes se atreven a ser diferentes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="#">Sesión Fotográfica</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Políticas de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Descubre</h4>
+                    <ul>
+                        <li><a href="#">Nueva Colección</a></li>
+                        <li><a href="#">Arneses</a></li>
+                        <li><a href="#">Lencería</a></li>
+                        <li><a href="#">Máscaras</a></li>
+                        <li><a href="#">Salvaje Jackets</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul class="contact-list">
+                        <li><i class="fas fa-map-marker-alt"></i> Medellín, Colombia</li>
+                        <li><i class="fas fa-phone"></i> +57 321 882 8027</li>
+                        <li><i class="fas fa-envelope"></i> order@salvajeindumentary.co</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SALVAJE Indumentary. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Carrito de Compras</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Los items se cargarán dinámicamente -->
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <button class="btn btn-primary btn-block">Finalizar Compra</button>
+            <button class="btn btn-secondary btn-block" id="clearCart">Vaciar Carrito</button>
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modalBody">
+                <!-- Contenido del producto se cargará dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content booking-modal-content">
+            <button class="close-modal" id="closeBookingModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <h2 class="booking-title">
+                    <i class="fas fa-calendar-alt"></i> Reservar Sesión Fotográfica
+                </h2>
+                
+                <!-- Progress Steps -->
+                <div class="booking-steps">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Plan</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Fecha</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Hora</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-label">Datos</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Plan Selection -->
+                <div class="booking-step" id="step1">
+                    <h3>Selecciona tu plan</h3>
+                    <div class="plan-options">
+                        <div class="plan-option" data-plan="esencia" data-price="350000">
+                            <div class="plan-option-header">
+                                <h4>Sesión ESENCIA</h4>
+                                <p class="plan-price">$350.000 COP</p>
+                            </div>
+                            <p class="plan-duration">30 minutos - 10 fotos</p>
+                        </div>
+                        <div class="plan-option" data-plan="elegant" data-price="570000">
+                            <div class="plan-option-header">
+                                <h4>Sesión ELEGANT</h4>
+                                <p class="plan-price">$570.000 COP</p>
+                            </div>
+                            <p class="plan-duration">1 hora - 20 fotos</p>
+                        </div>
+                        <div class="plan-option" data-plan="premium" data-price="900000">
+                            <div class="plan-option-header">
+                                <h4>Sesión PREMIUM</h4>
+                                <p class="plan-price">$900.000 COP</p>
+                            </div>
+                            <p class="plan-duration">1.5 horas - 30 fotos</p>
+                        </div>
+                        <div class="plan-option" data-plan="nacional" data-price="1500000">
+                            <div class="plan-option-header">
+                                <h4>Plan NACIONAL</h4>
+                                <p class="plan-price">$1.500.000 COP</p>
+                            </div>
+                            <p class="plan-duration">2 horas - 30 fotos + 2 clips</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="goToStep2">Siguiente <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- Step 2: Date Selection -->
+                <div class="booking-step" id="step2" style="display: none;">
+                    <h3>Selecciona la fecha</h3>
+                    <div id="calendar" class="calendar"></div>
+                    <div class="booking-navigation">
+                        <button class="btn btn-secondary" id="backToStep1"><i class="fas fa-arrow-left"></i> Atrás</button>
+                        <button class="btn btn-primary" id="goToStep3" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Time Selection -->
+                <div class="booking-step" id="step3" style="display: none;">
+                    <h3>Selecciona la hora</h3>
+                    <p class="selected-date-display" id="selectedDateDisplay"></p>
+                    <div id="timeSlots" class="time-slots"></div>
+                    <div class="booking-navigation">
+                        <button class="btn btn-secondary" id="backToStep2"><i class="fas fa-arrow-left"></i> Atrás</button>
+                        <button class="btn btn-primary" id="goToStep4" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Client Data -->
+                <div class="booking-step" id="step4" style="display: none;">
+                    <h3>Confirma tus datos</h3>
+                    
+                    <!-- Booking Summary -->
+                    <div class="booking-summary">
+                        <h4><i class="fas fa-clipboard-check"></i> Resumen de tu reserva</h4>
+                        <div class="summary-item">
+                            <span class="summary-label">Plan:</span>
+                            <span class="summary-value" id="summaryPlan"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Fecha:</span>
+                            <span class="summary-value" id="summaryDate"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Hora:</span>
+                            <span class="summary-value" id="summaryTime"></span>
+                        </div>
+                        <div class="summary-item total">
+                            <span class="summary-label">Total:</span>
+                            <span class="summary-value" id="summaryTotal"></span>
+                        </div>
+                    </div>
+
+                    <!-- Client Form -->
+                    <form id="bookingForm" class="booking-form">
+                        <div class="form-group">
+                            <label for="clientName"><i class="fas fa-user"></i> Nombre completo *</label>
+                            <input type="text" id="clientName" name="clientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientEmail"><i class="fas fa-envelope"></i> Correo electrónico *</label>
+                            <input type="email" id="clientEmail" name="clientEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientPhone"><i class="fas fa-phone"></i> Teléfono / WhatsApp *</label>
+                            <input type="tel" id="clientPhone" name="clientPhone" required placeholder="3001234567">
+                        </div>
+                        <div class="form-group">
+                            <label for="clientNotes"><i class="fas fa-comment"></i> Notas adicionales (opcional)</label>
+                            <textarea id="clientNotes" name="clientNotes" rows="3" placeholder="Cuéntanos si tienes alguna preferencia o requisito especial"></textarea>
+                        </div>
+                    </form>
+
+                    <div class="booking-navigation">
+                        <button class="btn btn-secondary" id="backToStep3"><i class="fas fa-arrow-left"></i> Atrás</button>
+                        <button class="btn btn-primary btn-lg" id="confirmBooking">
+                            <i class="fab fa-whatsapp"></i> Confirmar Reserva por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminPanelModal">
+        <div class="modal-content admin-modal-content">
+            <button class="close-modal" id="closeAdminModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="admin-panel">
+                <div class="admin-header">
+                    <h2><i class="fas fa-user-shield"></i> Panel de Administración</h2>
+                    <button class="btn btn-secondary" onclick="logoutAdmin()">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+                
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="products">
+                        <i class="fas fa-box"></i> Productos
+                    </button>
+                    <button class="admin-tab" data-tab="bookings">
+                        <i class="fas fa-calendar-alt"></i> Agenda de Sesiones
+                    </button>
+                </div>
+                
+                <!-- Tab: Gestión de Productos -->
+                <div class="admin-tab-content active" id="tab-products">
+                    <div class="admin-section-header">
+                        <h3>Gestión de Productos</h3>
+                        <button class="btn btn-primary" id="addProductBtn">
+                            <i class="fas fa-plus"></i> Agregar Producto
+                        </button>
+                    </div>
+                    <div id="adminProductsList" class="admin-products-list">
+                        <!-- Los productos se cargarán aquí -->
+                    </div>
+                </div>
+                
+                <!-- Tab: Agenda de Sesiones -->
+                <div class="admin-tab-content" id="tab-bookings">
+                    <div class="admin-section-header">
+                        <h3>Agenda de Sesiones Fotográficas</h3>
+                        <button class="btn btn-secondary" id="refreshBookingsBtn">
+                            <i class="fas fa-sync-alt"></i> Actualizar
+                        </button>
+                    </div>
+                    <div id="adminBookingsList" class="admin-bookings-list">
+                        <!-- Las reservas se cargarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar/Editar Producto -->
+    <div class="modal" id="productFormModal">
+        <div class="modal-content product-form-modal">
+            <button class="close-modal" id="closeProductFormModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <h2 id="productFormTitle">Agregar Producto</h2>
+                <form id="productForm" class="product-form">
+                    <input type="hidden" id="productFormId">
+                    
+                    <div class="form-group">
+                        <label for="productName">Nombre del Producto *</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productCategory">Categoría *</label>
+                        <select id="productCategory" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="arneses">Arneses</option>
+                            <option value="jackets">Jackets</option>
+                            <option value="lenceria">Lencería</option>
+                            <option value="mascaras">Máscaras</option>
+                            <option value="accesorios">Accesorios</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice">Precio (COP) *</label>
+                            <input type="number" id="productPrice" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productOriginalPrice">Precio Original (opcional)</label>
+                            <input type="number" id="productOriginalPrice" min="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productImage">URL de la Imagen *</label>
+                        <input type="text" id="productImage" placeholder="images/products/nombre.jpg" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription">Descripción *</label>
+                        <textarea id="productDescription" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productRating">Calificación (1-5) *</label>
+                            <input type="number" id="productRating" min="1" max="5" value="5" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="productFeatured"> Producto Destacado
+                            </label>
+                            <label>
+                                <input type="checkbox" id="productOnSale"> En Oferta
+                            </label>
+                            <label>
+                                <input type="checkbox" id="productInStock" checked> En Stock
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelProductForm">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="marketplace-script.js"></script>
+    <script src="booking-system.js"></script>
+    <script src="admin-panel.js"></script>
+</body>
+</html>
+
+
+
+                        <div class="session-header">
+
+                            <span class="session-number">3</span>
+
+                            <h4 class="session-name">Sesión <span class="highlight">PREMIUM</span></h4>
+
+                            <p class="session-price">$900.000 COP</p>
+
+                        </div>
+
+                        <div class="session-body">
+
+                            <p class="session-description">
+
+                                Esta es una experiencia completa. Incluye maquillaje profesional, uso de uno de nuestros arneses como obsequio y una sesión fotográfica íntima, poderosa y transformadora.
+
+                            </p>
+
+                            <p class="session-description-extra">
+
+                                No solo vas a verte diferente, vas a sentirte diferente. Ideal para mujeres que quieren vivir un momento para reconectarse, regalarse autoestima y guardar para siempre una nueva forma de verse.
+
+                            </p>
+
+                            <h5 class="includes-title">Incluye:</h5>
+
+                            <ul class="includes-list">
+
+                                <li><i class="fas fa-check"></i> Dos vestuarios de obsequio</li>
+
+                                <li><i class="fas fa-check"></i> Sesión completa</li>
+
+                                <li><i class="fas fa-check"></i> Dirección lenguaje corporal</li>
+
+                                <li><i class="fas fa-check"></i> 30 fotos editadas</li>
+
+                                <li><i class="fas fa-check"></i> Duración: 1 hora y 30 minutos</li>
+
+                                <li><i class="fas fa-check"></i> Coordinadora que te asesorará en Styling y en todo lo que necesites</li>
+
+                                <li><i class="fas fa-check"></i> 6 Cambios de vestuario (los llevas tú)</li>
+
+                            </ul>
+
+                            <p class="session-value">Valor: $900.000</p>
+
+                            <button class="btn btn-primary session-reserve-btn" onclick="openBookingModal('premium', 900000)">
+
+                                <i class="fas fa-calendar-check"></i> Reservar Sesión
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Plan Nacional -->
+
+            <div class="national-plan">
+
+                <div class="national-plan-header">
+
+                    <h3 class="national-plan-title">PLAN NACIONAL – SESIONES PREMIUM SALVAJE</h3>
+
+                    <h4 class="national-plan-subtitle">GIRA NACIONAL: EL VIAJE HACIA TI</h4>
+
+                    <p class="national-plan-price">Precio: $1.500.000 COP</p>
+
+                </div>
+
+                
+
+                <div class="national-plan-content">
+
+                    <div class="national-plan-info">
+
+                        <h5><i class="fas fa-map-marker-alt"></i> Ciudades:</h5>
+
+                        <p class="cities-list">Medellín, Cali, Manizales, Armenia, Pereira, Barranquilla, Cartagena, Santa Marta, Bucaramanga e Ibagué.</p>
+
+                        
+
+                        <h5><i class="fas fa-lightbulb"></i> Concepto general:</h5>
+
+                        <p>
+
+                            Una experiencia fotográfica emocional y transformadora para mujeres en distintas ciudades del país. Un viaje íntimo de conexión con el cuerpo, la autoestima y la sensualidad a través del arte fotográfico.
+
+                        </p>
+
+                        
+
+                        <h5><i class="fas fa-star"></i> Incluye:</h5>
+
+                        <ul class="national-includes">
+
+                            <li><i class="fas fa-check"></i> Dirección emocional y estética durante la sesión</li>
+
+                            <li><i class="fas fa-check"></i> Arnés obsequio confeccionado a tu medida</li>
+
+                            <li><i class="fas fa-check"></i> Charla coaching para iniciar tu sesión fotográfica</li>
+
+                            <li><i class="fas fa-check"></i> 30 fotos finales y 2 clips</li>
+
+                            <li><i class="fas fa-check"></i> Asesoramiento Styling</li>
+
+                            <li><i class="fas fa-check"></i> Duración: 2 horas</li>
+
+                            <li><i class="fas fa-check"></i> Asesoría estética, dirección emocional, postproducción profesional</li>
+
+                            <li><i class="fas fa-check"></i> Selección y edición de material logrado durante la sesión</li>
+
+                            <li><i class="fas fa-check"></i> 5 cambios de vestuario (definidos previamente)</li>
+
+                        </ul>
+
+                        
+
+                        <div class="location-pricing">
+
+                            <h5><i class="fas fa-map-marked-alt"></i> Precio por locación (no incluido en el paquete):</h5>
+
+                            <ul class="location-list">
+
+                                <li>• Tipo editorial apartamento: <strong>$400.000 COP</strong></li>
+
+                                <li>• Estudio fotográfico: <strong>$400.000 COP</strong></li>
+
+                            </ul>
+
+                            <p class="location-note"><em>El valor de la locación es adicional y depende de la que elijas.</em></p>
+
+                        </div>
+
+                        
+
+                        <p class="national-final-value"><strong>Valor: $1.500.000 COP</strong></p>
+
+                    </div>
+
+                    
+
+                    <div class="national-plan-cta">
+
+                        <button class="btn btn-primary btn-lg" onclick="openBookingModal('nacional', 1500000)">
+
+                            <i class="fas fa-calendar-check"></i> Reservar Mi Sesión
+
+                        </button>
+
+                        <p class="cta-note">Selecciona fecha y hora disponible para tu sesión</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Features Section -->
+
+    <section class="features">
+
+        <div class="container">
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-truck"></i>
+
+                    </div>
+
+                    <h3>Envío Gratis</h3>
+
+                    <p>En compras superiores a $200.000</p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-shield-alt"></i>
+
+                    </div>
+
+                    <h3>Compra Segura</h3>
+
+                    <p>Protección de datos garantizada</p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-undo"></i>
+
+                    </div>
+
+                    <h3>Devoluciones</h3>
+
+                    <p>30 días para cambios y devoluciones</p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-headset"></i>
+
+                    </div>
+
+                    <h3>Soporte 24/7</h3>
+
+                    <p>Atención personalizada siempre</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Newsletter Section -->
+
+    <section class="newsletter">
+
+        <div class="container">
+
+            <div class="newsletter-content">
+
+                <h2>Únete a la Comunidad Salvaje</h2>
+
+                <p>Recibe ofertas exclusivas y entérate de nuestros nuevos lanzamientos</p>
+
+                <form class="newsletter-form" id="newsletterForm">
+
+                    <input type="email" placeholder="Tu correo electrónico" required>
+
+                    <button type="submit" class="btn btn-primary">Suscribirse</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-col">
+
+                    <h3>SALVAJE Indumentary</h3>
+
+                    <p>Leather indumentary de alta calidad, diseñada para quienes se atreven a ser diferentes.</p>
+
+                    <div class="social-links">
+
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div class="footer-col">
+
+                    <h4>Información</h4>
+
+                    <ul>
+
+                        <li><a href="#">Sesión Fotográfica</a></li>
+
+                        <li><a href="#">Sobre Nosotros</a></li>
+
+                        <li><a href="#">Políticas de Privacidad</a></li>
+
+                        <li><a href="#">Términos y Condiciones</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div class="footer-col">
+
+                    <h4>Descubre</h4>
+
+                    <ul>
+
+                        <li><a href="#">Nueva Colección</a></li>
+
+                        <li><a href="#">Arneses</a></li>
+
+                        <li><a href="#">Lencería</a></li>
+
+                        <li><a href="#">Máscaras</a></li>
+
+                        <li><a href="#">Salvaje Jackets</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div class="footer-col">
+
+                    <h4>Contacto</h4>
+
+                    <ul class="contact-list">
+
+                        <li><i class="fas fa-map-marker-alt"></i> Medellín, Colombia</li>
+
+                        <li><i class="fas fa-phone"></i> +57 321 882 8027</li>
+
+                        <li><i class="fas fa-envelope"></i> order@salvajeindumentary.co</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="footer-bottom">
+
+                <p>&copy; 2025 SALVAJE Indumentary. Todos los derechos reservados.</p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- Cart Sidebar -->
+
+    <div class="cart-sidebar" id="cartSidebar">
+
+        <div class="cart-header">
+
+            <h3>Carrito de Compras</h3>
+
+            <button class="close-cart" id="closeCart">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+        </div>
+
+        
+
+        <div class="cart-items" id="cartItems">
+
+            <!-- Los items se cargarán dinámicamente -->
+
+        </div>
+
+        
+
+        <div class="cart-footer">
+
+            <div class="cart-total">
+
+                <span>Total:</span>
+
+                <span id="cartTotal">$0</span>
+
+            </div>
+
+            <button class="btn btn-primary btn-block">Finalizar Compra</button>
+
+            <button class="btn btn-secondary btn-block" id="clearCart">Vaciar Carrito</button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Product Quick View Modal -->
+
+    <div class="modal" id="quickViewModal">
+
+        <div class="modal-content">
+
+            <button class="close-modal" id="closeModal">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+            <div class="modal-body" id="modalBody">
+
+                <!-- Contenido del producto se cargará dinámicamente -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Booking Modal -->
+
+    <div class="modal" id="bookingModal">
+
+        <div class="modal-content booking-modal-content">
+
+            <button class="close-modal" id="closeBookingModal">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+            <div class="modal-body">
+
+                <h2 class="booking-title">
+
+                    <i class="fas fa-calendar-alt"></i> Reservar Sesión Fotográfica
+
+                </h2>
+
+                
+
+                <!-- Progress Steps -->
+
+                <div class="booking-steps">
+
+                    <div class="step active" data-step="1">
+
+                        <span class="step-number">1</span>
+
+                        <span class="step-label">Plan</span>
+
+                    </div>
+
+                    <div class="step" data-step="2">
+
+                        <span class="step-number">2</span>
+
+                        <span class="step-label">Fecha</span>
+
+                    </div>
+
+                    <div class="step" data-step="3">
+
+                        <span class="step-number">3</span>
+
+                        <span class="step-label">Hora</span>
+
+                    </div>
+
+                    <div class="step" data-step="4">
+
+                        <span class="step-number">4</span>
+
+                        <span class="step-label">Datos</span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Step 1: Plan Selection -->
+
+                <div class="booking-step" id="step1">
+
+                    <h3>Selecciona tu plan</h3>
+
+                    <div class="plan-options">
+
+                        <div class="plan-option" data-plan="esencia" data-price="350000">
+
+                            <div class="plan-option-header">
+
+                                <h4>Sesión ESENCIA</h4>
+
+                                <p class="plan-price">$350.000 COP</p>
+
+                            </div>
+
+                            <p class="plan-duration">30 minutos - 10 fotos</p>
+
+                        </div>
+
+                        <div class="plan-option" data-plan="elegant" data-price="570000">
+
+                            <div class="plan-option-header">
+
+                                <h4>Sesión ELEGANT</h4>
+
+                                <p class="plan-price">$570.000 COP</p>
+
+                            </div>
+
+                            <p class="plan-duration">1 hora - 20 fotos</p>
+
+                        </div>
+
+                        <div class="plan-option" data-plan="premium" data-price="900000">
+
+                            <div class="plan-option-header">
+
+                                <h4>Sesión PREMIUM</h4>
+
+                                <p class="plan-price">$900.000 COP</p>
+
+                            </div>
+
+                            <p class="plan-duration">1.5 horas - 30 fotos</p>
+
+                        </div>
+
+                        <div class="plan-option" data-plan="nacional" data-price="1500000">
+
+                            <div class="plan-option-header">
+
+                                <h4>Plan NACIONAL</h4>
+
+                                <p class="plan-price">$1.500.000 COP</p>
+
+                            </div>
+
+                            <p class="plan-duration">2 horas - 30 fotos + 2 clips</p>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary" id="goToStep2">Siguiente <i class="fas fa-arrow-right"></i></button>
+
+                </div>
+
+
+
+                <!-- Step 2: Date Selection -->
+
+                <div class="booking-step" id="step2" style="display: none;">
+
+                    <h3>Selecciona la fecha</h3>
+
+                    <div id="calendar" class="calendar"></div>
+
+                    <div class="booking-navigation">
+
+                        <button class="btn btn-secondary" id="backToStep1"><i class="fas fa-arrow-left"></i> Atrás</button>
+
+                        <button class="btn btn-primary" id="goToStep3" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Step 3: Time Selection -->
+
+                <div class="booking-step" id="step3" style="display: none;">
+
+                    <h3>Selecciona la hora</h3>
+
+                    <p class="selected-date-display" id="selectedDateDisplay"></p>
+
+                    <div id="timeSlots" class="time-slots"></div>
+
+                    <div class="booking-navigation">
+
+                        <button class="btn btn-secondary" id="backToStep2"><i class="fas fa-arrow-left"></i> Atrás</button>
+
+                        <button class="btn btn-primary" id="goToStep4" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Step 4: Client Data -->
+
+                <div class="booking-step" id="step4" style="display: none;">
+
+                    <h3>Confirma tus datos</h3>
+
+                    
+
+                    <!-- Booking Summary -->
+
+                    <div class="booking-summary">
+
+                        <h4><i class="fas fa-clipboard-check"></i> Resumen de tu reserva</h4>
+
+                        <div class="summary-item">
+
+                            <span class="summary-label">Plan:</span>
+
+                            <span class="summary-value" id="summaryPlan"></span>
+
+                        </div>
+
+                        <div class="summary-item">
+
+                            <span class="summary-label">Fecha:</span>
+
+                            <span class="summary-value" id="summaryDate"></span>
+
+                        </div>
+
+                        <div class="summary-item">
+
+                            <span class="summary-label">Hora:</span>
+
+                            <span class="summary-value" id="summaryTime"></span>
+
+                        </div>
+
+                        <div class="summary-item total">
+
+                            <span class="summary-label">Total:</span>
+
+                            <span class="summary-value" id="summaryTotal"></span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Client Form -->
+
+                    <form id="bookingForm" class="booking-form">
+
+                        <div class="form-group">
+
+                            <label for="clientName"><i class="fas fa-user"></i> Nombre completo *</label>
+
+                            <input type="text" id="clientName" name="clientName" required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="clientEmail"><i class="fas fa-envelope"></i> Correo electrónico *</label>
+
+                            <input type="email" id="clientEmail" name="clientEmail" required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="clientPhone"><i class="fas fa-phone"></i> Teléfono / WhatsApp *</label>
+
+                            <input type="tel" id="clientPhone" name="clientPhone" required placeholder="3001234567">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="clientNotes"><i class="fas fa-comment"></i> Notas adicionales (opcional)</label>
+
+                            <textarea id="clientNotes" name="clientNotes" rows="3" placeholder="Cuéntanos si tienes alguna preferencia o requisito especial"></textarea>
+
+                        </div>
+
+                    </form>
+
+
+
+                    <div class="booking-navigation">
+
+                        <button class="btn btn-secondary" id="backToStep3"><i class="fas fa-arrow-left"></i> Atrás</button>
+
+                        <button class="btn btn-primary btn-lg" id="confirmBooking">
+
+                            <i class="fab fa-whatsapp"></i> Confirmar Reserva por WhatsApp
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Overlay -->
+
+    <div class="overlay" id="overlay"></div>
+
+
+
+    <script src="marketplace-script.js"></script>
+
+    <script src="booking-system.js"></script>
+
+</body>
+
+</html>
+
+
+
+

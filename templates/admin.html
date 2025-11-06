@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}Panel de Administración - SALVAJE Indumentary{% endblock %}
+
+{% block content %}
+<header class="header">
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h1><a href="{{ url_for('catalogo.index') }}" style="text-decoration: none; color: inherit;">SALVAJE</a></h1>
+                    <span>Indumentary</span>
+                </div>
+                <div class="nav-actions">
+                    <a href="{{ url_for('catalogo.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> Volver al Sitio
+                    </a>
+                    <a href="{{ url_for('admin.logout') }}" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="products" style="padding: 80px 0;">
+    <div class="container">
+        <div class="admin-panel-header">
+            <h2 class="section-title">Panel de Administración</h2>
+            <a href="{{ url_for('admin.agregar_producto') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Agregar Producto
+            </a>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="showTab('products')">
+                <i class="fas fa-box"></i> Productos
+            </button>
+            <button class="admin-tab" onclick="showTab('bookings')">
+                <i class="fas fa-calendar-alt"></i> Reservas
+            </button>
+        </div>
+
+        <!-- Tab Productos -->
+        <div id="tab-products" class="admin-tab-content active">
+            <div class="admin-products-grid">
+                {% for product in products %}
+                <div class="admin-product-card">
+                    <div class="admin-product-image">
+                        <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+                    </div>
+                    <div class="admin-product-info">
+                        <h3>{{ product.name }}</h3>
+                        <p><strong>Categoría:</strong> {{ product.category|title }}</p>
+                        <p><strong>Precio:</strong> ${{ "{:,}".format(product.price) }} COP</p>
+                        {% if product.originalPrice %}
+                        <p><strong>Precio Original:</strong> ${{ "{:,}".format(product.originalPrice) }} COP</p>
+                        {% endif %}
+                        <div class="product-status-badges">
+                            {% if product.inStock %}
+                                <span class="status-badge status-available">
+                                    <i class="fas fa-check-circle"></i> Disponible
+                                </span>
+                            {% else %}
+                                <span class="status-badge status-discarded">
+                                    <i class="fas fa-times-circle"></i> Descartado
+                                </span>
+                            {% endif %}
+                            {% if product.featured %}
+                                <span class="status-badge status-featured">
+                                    <i class="fas fa-star"></i> Destacado
+                                </span>
+                            {% endif %}
+                            {% if product.onSale %}
+                                <span class="status-badge status-sale">
+                                    <i class="fas fa-tag"></i> En Oferta
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="admin-product-actions">
+                            <a href="{{ url_for('admin.editar_producto', product_id=product.id) }}" class="btn btn-secondary">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <form method="POST" action="{{ url_for('admin.eliminar_producto', product_id=product.id) }}" style="display: inline;" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Tab Reservas -->
+        <div id="tab-bookings" class="admin-tab-content">
+            <div class="admin-bookings-list">
+                {% if bookings %}
+                    {% for booking in bookings %}
+                    <div class="admin-booking-card">
+                        <h3>{{ booking.planName }}</h3>
+                        <p><strong>Fecha:</strong> {{ booking.date }}</p>
+                        <p><strong>Hora:</strong> {{ booking.time }}</p>
+                        <p><strong>Precio:</strong> ${{ "{:,}".format(booking.price) }} COP</p>
+                        <p><strong>Cliente:</strong> {{ booking.client.name }}</p>
+                        <p><strong>Email:</strong> {{ booking.client.email }}</p>
+                        <p><strong>Teléfono:</strong> {{ booking.client.phone }}</p>
+                        <p><strong>Estado:</strong> {{ booking.status|title }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No hay reservas registradas</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.admin-tab {
+    padding: 15px 30px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 16px;
+}
+
+.admin-tab:hover {
+    color: var(--accent-color);
+}
+
+.admin-tab.active {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.admin-tab-content {
+    display: none;
+}
+
+.admin-tab-content.active {
+    display: block;
+}
+
+.admin-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.admin-product-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.admin-product-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+.admin-product-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.admin-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-product-info {
+    padding: 20px;
+}
+
+.admin-product-info h3 {
+    margin: 0 0 15px 0;
+    color: var(--text-primary);
+}
+
+.admin-product-info p {
+    margin: 8px 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.admin-product-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-danger {
+    background: var(--error-color);
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.admin-bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-booking-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.admin-booking-card h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.admin-booking-card p {
+    margin: 8px 0;
+    color: var(--text-secondary);
+}
+
+.product-status-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-available {
+    background: rgba(39, 174, 96, 0.2);
+    color: var(--success-color);
+}
+
+.status-discarded {
+    background: rgba(231, 76, 60, 0.2);
+    color: var(--error-color);
+}
+
+.status-featured {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--accent-color);
+}
+
+.status-sale {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function showTab(tabName) {
+    // Ocultar todos los tabs
+    document.querySelectorAll('.admin-tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Ocultar todos los botones
+    document.querySelectorAll('.admin-tab').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Mostrar el tab seleccionado
+    document.getElementById('tab-' + tabName).classList.add('active');
+    
+    // Activar el botón correspondiente
+    event.target.classList.add('active');
+}
+</script>
+{% endblock %}
+

@@ -1,0 +1,103 @@
+[
+  {
+    "id": 1,
+    "name": "MEDIAS MALLA",
+    "category": "lenceria",
+    "price": 60000,
+    "originalPrice": null,
+    "rating": 5,
+    "image": "images/products/medias-malla.jpg",
+    "description": "Medias de malla de alta calidad, perfectas para complementar cualquier outfit.",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "BONNIE",
+    "category": "arneses",
+    "price": 120000,
+    "originalPrice": 200000,
+    "rating": 5,
+    "image": "images/products/bonnie.jpg",
+    "description": "Línea Elite - Arnés Bonnie con diseño exclusivo en cuero premium.",
+    "inStock": true,
+    "featured": true,
+    "onSale": true
+  },
+  {
+    "id": 3,
+    "name": "Cisne Negro",
+    "category": "arneses",
+    "price": 190000,
+    "originalPrice": 290000,
+    "rating": 5,
+    "image": "images/products/cine-negro.jpg",
+    "description": "Diseño inspirado en la elegancia del cisne negro.",
+    "inStock": true,
+    "featured": true,
+    "onSale": true
+  },
+  {
+    "id": 4,
+    "name": "CROP TOP ARNÉS",
+    "category": "arneses",
+    "price": 180000,
+    "originalPrice": null,
+    "rating": 4,
+    "image": "images/products/crop-top-arnes.jpg",
+    "description": "Crop top arnés versátil y cómodo para cualquier ocasión.",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 5,
+    "name": "DIANA DE GALES",
+    "category": "arneses",
+    "price": 470000,
+    "originalPrice": 1100000,
+    "rating": 5,
+    "image": "images/products/diana-de-gales.jpg",
+    "description": "Pieza exclusiva de edición limitada con detalles premium.",
+    "inStock": true,
+    "featured": true,
+    "onSale": true
+  },
+  {
+    "id": 6,
+    "name": "Alligator",
+    "category": "jackets",
+    "price": 310000,
+    "originalPrice": 500000,
+    "rating": 5,
+    "image": "images/products/alligator.jpg",
+    "description": "Jacket con textura alligator de alta calidad.",
+    "inStock": true,
+    "featured": true,
+    "onSale": true
+  },
+  {
+    "id": 7,
+    "name": "Oveja Negra",
+    "category": "jackets",
+    "price": 1100000,
+    "originalPrice": null,
+    "rating": 5,
+    "image": "images/products/oveja-negra.jpg",
+    "description": "Jacket premium con diseño único y acabados de lujo.",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 8,
+    "name": "INFINITY CHOKER",
+    "category": "accesorios",
+    "price": 55000,
+    "originalPrice": 75000,
+    "rating": 4,
+    "image": "images/products/infinity-choker.jpg",
+    "description": "Choker con símbolo de infinito, disponible en diferentes acabados.",
+    "inStock": true,
+    "featured": false,
+    "onSale": true
+  }
+]
