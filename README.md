@@ -174,6 +174,16 @@ export ADMIN_PASS="contraseña-segura"
 - `DELETE /admin/productos/eliminar/<id>` - Eliminar producto
 - `GET /admin/api/reservas` - Reservas registradas (JSON)
 
+## 🛍️ Catálogo de Productos
+
+### Categorías Disponibles
+El sistema maneja 5 categorías principales de productos:
+- **Arneses**: Diseños exclusivos en cuero premium
+- **Jackets**: Chaquetas de cuero con estilo alternativo
+- **Lencería**: Piezas únicas y atrevidas
+- **Máscaras**: Accesorios premium para eventos
+- **Accesorios**: Complementos ideales para cualquier outfit
+
 ## 📝 Estructura de Datos
 
 ### Producto
